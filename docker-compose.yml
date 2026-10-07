@@ -1,0 +1,68 @@
+name: ween-demo
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    platform: linux/amd64   # image officielle amd64 ; émulée sur Mac Apple Silicon
+    environment:
+      POSTGRES_DB: ween
+      POSTGRES_USER: ween
+      POSTGRES_PASSWORD: ween_demo
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ween -d ween"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.25.3
+    platform: linux/amd64   # image amd64 ; émulée sur Mac Apple Silicon
+    environment:
+      SKIP_DEMO_DATA: "true"
+      CORS_ENABLED: "true"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  ingest:
+    build: ./ingest
+    environment:
+      DATABASE_URL: postgres://ween:ween_demo@db:5432/ween
+      GEOSERVER_URL: http://geoserver:8080/geoserver
+      GEOSERVER_USER: admin
+      GEOSERVER_PASSWORD: geoserver
+    depends_on:
+      db:
+        condition: service_healthy
+      geoserver:
+        condition: service_started
+    restart: "no"
+
+  api:
+    build: ./api
+    environment:
+      DATABASE_URL: postgres://ween:ween_demo@db:5432/ween
+      PORT: "3000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./web
+    ports:
+      - "8000:80"
+    depends_on:
+      - api
+      - geoserver
+
+volumes:
+  db-data:

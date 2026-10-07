@@ -1,0 +1,9 @@
+code,nom,type,cours_eau,lon,lat
+MAN-H01,Kindu (fictive),hydrometrique,Lualaba,25.92,-2.95
+MAN-H02,Kibombo (fictive),hydrometrique,Lualaba,25.92,-3.90
+MAN-H03,Kasongo (fictive),hydrometrique,Lualaba,26.66,-4.45
+MAN-H04,Lubutu (fictive),hydrometrique,Lowa,26.58,-0.73
+MAN-P01,Punia (fictive),pluviometrique,,26.45,-1.47
+MAN-P02,Pangi (fictive),pluviometrique,,26.64,-3.19
+MAN-X01,Station mal géolocalisée (test),hydrometrique,,2.35,48.85
+MAN-X02,Type inconnu (test),barrage,Lualaba,26.10,-2.63
