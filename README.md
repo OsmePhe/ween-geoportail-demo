@@ -28,13 +28,13 @@ Sources ouvertes + fichiers CSV
  Portail React + Leaflet (servi par nginx)
 ```
 
-| Service | Rôle | Adresse locale |
-| --- | --- | --- |
-| `db` | PostgreSQL 16 + PostGIS 3.4 | `localhost:5432` |
-| `ingest` | Flux d'intégration, puis publication des couches dans GeoServer | s'exécute une fois |
-| `api` | API REST documentée (OpenAPI / Swagger) | http://localhost:3000/api/docs |
-| `geoserver` | Services cartographiques OGC | http://localhost:8080/geoserver (admin / geoserver) |
-| `web` | Portail cartographique | **http://localhost:8000** |
+| Service     | Rôle                                                            | Adresse locale                                      |
+| ----------- | --------------------------------------------------------------- | --------------------------------------------------- |
+| `db`        | PostgreSQL 16 + PostGIS 3.4                                     | `localhost:5432`                                    |
+| `ingest`    | Flux d'intégration, puis publication des couches dans GeoServer | s'exécute une fois                                  |
+| `api`       | API REST documentée (OpenAPI / Swagger)                         | http://localhost:3000/api/docs                      |
+| `geoserver` | Services cartographiques OGC                                    | http://localhost:8080/geoserver (admin / geoserver) |
+| `web`       | Portail cartographique                                          | **http://localhost:8000**                           |
 
 ## Lancer le démonstrateur
 
@@ -68,14 +68,14 @@ date invalide, valeur négative, station inconnue, valeur non numérique) pour i
 
 ## API
 
-| Méthode | Route | Description |
-| --- | --- | --- |
-| GET | `/api/catalogue` | Jeux de données, volumétrie, source, dernière mise à jour, couche OGC |
-| GET | `/api/stations?type=` | Stations en GeoJSON |
-| GET | `/api/stations/{code}/mesures?debut=&fin=` | Série de mesures d'une station |
-| GET | `/api/stations-proches?lon=&lat=&km=` | Requête spatiale PostGIS : stations à moins de N km |
-| GET | `/api/imports` | Journal des imports et motifs de rejet |
-| GET | `/api/docs` | Documentation interactive OpenAPI |
+| Méthode | Route                                      | Description                                                           |
+| ------- | ------------------------------------------ | --------------------------------------------------------------------- |
+| GET     | `/api/catalogue`                           | Jeux de données, volumétrie, source, dernière mise à jour, couche OGC |
+| GET     | `/api/stations?type=`                      | Stations en GeoJSON                                                   |
+| GET     | `/api/stations/{code}/mesures?debut=&fin=` | Série de mesures d'une station                                        |
+| GET     | `/api/stations-proches?lon=&lat=&km=`      | Requête spatiale PostGIS : stations à moins de N km                   |
+| GET     | `/api/imports`                             | Journal des imports et motifs de rejet                                |
+| GET     | `/api/docs`                                | Documentation interactive OpenAPI                                     |
 
 ## Développement
 
@@ -88,3 +88,5 @@ cd web && npm install && npm run dev   # portail sur http://localhost:5173, rela
 - geoBoundaries, limites administratives (ADM1), licence ouverte : https://www.geoboundaries.org
 - Natural Earth, cours d'eau et limites (domaine public) : https://www.naturalearthdata.com
 - Fond de carte © contributeurs OpenStreetMap
+
+Réalisé par **Omar OGOUBI**, ingénieur full stack · [github.com/OsmePhe](https://github.com/OsmePhe)
